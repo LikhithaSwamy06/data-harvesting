@@ -1,0 +1,63 @@
+// App.js
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './components/Home/Home';
+import SideNav from './components/common/SideNav';
+import SignIn from './components/SignIn/SignIn';
+import HeaderDrawer from './components/common/HeaderDrawer';
+import Dashboard from './components/Dashboard/Dashboard';
+import Projects from './components/UseCase/Projects';
+import DataArtifacts from './components/UseCase/DataArtifacts';
+import Configuration from './components/UseCase/Configuration';
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/dashboard/*" element={<DashboardRoutes />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+// Define DashboardRoutes component to handle child routes of Dashboard
+function DashboardRoutes() {
+  const [activeStep, setActiveStep] = useState(0);
+  return (
+    <>
+      <HeaderDrawer />
+      <SideNav />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route
+          path="/project"
+          element={
+            <Projects activeStep={activeStep} setActiveStep={setActiveStep} />
+          }
+        />
+        <Route
+          path="/data-artifacts"
+          element={
+            <DataArtifacts
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
+          }
+        />
+        <Route
+          path="/configuration"
+          element={
+            <Configuration
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
+          }
+        />
+      </Routes>
+    </>
+  );
+}
+
+export default App;

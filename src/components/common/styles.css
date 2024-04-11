@@ -1,0 +1,34 @@
+.card-header {
+  height: 56px;
+  background-color: rgb(246, 246, 249);
+}
+.header {
+  z-index: 2;
+  background-color: #ffffff;
+  color: #292442;
+  width: 100%;
+  position: relative;
+  top: 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1), 0 10px 32px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-container {
+  flex-flow: row;
+  align-items: center;
+  padding: 1rem;
+  display: flex;
+}
+.header-logo {
+  margin-bottom: -10px;
+}
+.list-item {
+  color: rgb(60, 46, 209);
+}
+.MuiOutlinedInput-root {
+  border: none !important;
+  outline: none !important;
+  height: 30px !important;
+  background-color: rgb(207, 208, 221) !important;
+}
