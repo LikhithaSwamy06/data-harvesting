@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
+import React from 'react';
 import './styles.css';
 
 function NoData() {
   return (
     <div className="nodata-container">
-      <div className="nodata-title">
-        sample-synthetic-healthcare.csv (810.57 KB)
-      </div>
+      <div className="nodata-title">sample-synthetic-healthcare.csv (810.57 KB)</div>
       <div className="nodata-items-container">
         <div className="nodata-title">
           <span className="nodata-items-v1">Records:</span>9999
@@ -23,8 +17,7 @@ function NoData() {
         </div>
       </div>
       <div className="nodata-subtitle">
-        Use this sample electronic health records (EHR) dataset to synthesize an
-        entirely new set of statistically equivalent records.
+        Use this sample dataset to synthesize a new set of records.
       </div>
     </div>
   );

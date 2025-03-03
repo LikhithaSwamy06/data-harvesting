@@ -1,4 +1,3 @@
-// Dashboard.js
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,25 +12,28 @@ import { useNavigate } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormLabel from '@mui/material/FormLabel';
 
 function DataArtifacts({ activeStep, setActiveStep }) {
   const [artifactType, setArtifactType] = useState('');
-  const [dataArtifactList, setDataArtifactList] = useState([
+  const navigate = useNavigate();
+
+  const dataArtifactList = [
     {
-      title: `I have a data artifact ready to upload. \n Click the button to select a local file, or drag and drop it into the upload window.`,
+      title:
+        'I have a data artifact (CSV or XLSX) ready to upload. Click the button or drag & drop.',
       value: 'upload',
     },
     {
-      title: `I would like to connect to my external data source. \n Select an existing connection or create a new one.`,
+      title:
+        'I would like to connect to my external data source. Select an existing connection or create a new one.',
       value: 'new',
     },
     {
-      title: `I dont have a data source. \n No worries, just use our sample dataset to get started.`,
+      title:
+        "I don't have a data source. Use our sample dataset to get started.",
       value: 'nodata',
     },
-  ]);
-  const navigate = useNavigate();
+  ];
 
   const handleArtifactTypeChange = (event) => {
     setArtifactType(event.target.value);
@@ -48,50 +50,44 @@ function DataArtifacts({ activeStep, setActiveStep }) {
       <CustomizedSteppers activeStep={activeStep} />
       <h1>Where's your data artifact?</h1>
       <h3>Let's begin by defining your input data</h3>
+
       <FormControl sx={{ width: '100%' }}>
         <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
           value={artifactType}
-          name="radio-buttons-group"
           onChange={handleArtifactTypeChange}
+          name="radio-buttons-group"
         >
-          <div
-            className="project-card"
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
+          <div className="project-card" style={{ flexDirection: 'column' }}>
             <FormControlLabel
-              value={dataArtifactList[0]?.value}
+              value={dataArtifactList[0].value}
               control={<Radio />}
-              label={dataArtifactList[0]?.title}
+              label={dataArtifactList[0].title}
             />
             {artifactType === 'upload' && <Upload />}
           </div>
-          <div
-            className="project-card"
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
+
+          <div className="project-card" style={{ flexDirection: 'column' }}>
             <FormControlLabel
-              value={dataArtifactList[1]?.value}
+              value={dataArtifactList[1].value}
               control={<Radio />}
-              label={dataArtifactList[1]?.title}
+              label={dataArtifactList[1].title}
             />
             {artifactType === 'new' && <NewConnection />}
           </div>
-          <div
-            className="project-card"
-            style={{ display: 'flex', flexDirection: 'column' }}
-          >
+
+          <div className="project-card" style={{ flexDirection: 'column' }}>
             <FormControlLabel
-              value={dataArtifactList[2]?.value}
+              value={dataArtifactList[2].value}
               control={<Radio />}
-              label={dataArtifactList[2]?.title}
+              label={dataArtifactList[2].title}
             />
             {artifactType === 'nodata' && <NoData />}
           </div>
         </RadioGroup>
       </FormControl>
+
       <div className="btn-container">
-        <Button className="btn-primary" onClick={() => handleContinue()}>
+        <Button className="btn-primary" onClick={handleContinue}>
           Continue
         </Button>
         <Button
@@ -109,3 +105,4 @@ function DataArtifacts({ activeStep, setActiveStep }) {
 }
 
 export default DataArtifacts;
+

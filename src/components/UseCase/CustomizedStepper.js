@@ -8,9 +8,7 @@ import Check from '@mui/icons-material/Check';
 import SettingsIcon from '@mui/icons-material/Settings';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
-import StepConnector, {
-  stepConnectorClasses,
-} from '@mui/material/StepConnector';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -38,8 +36,7 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
 }));
 
 const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-  backgroundColor:
-    theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
   zIndex: 1,
   color: '#fff',
   width: 50,
@@ -69,10 +66,7 @@ function ColorlibStepIcon(props) {
   };
 
   return (
-    <ColorlibStepIconRoot
-      ownerState={{ completed, active }}
-      className={className}
-    >
+    <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
       {icons[String(props.icon)]}
     </ColorlibStepIconRoot>
   );
@@ -85,7 +79,6 @@ const steps = [
 ];
 
 export default function CustomizedSteppers({ activeStep }) {
-  console.log('activeStep', activeStep);
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper
@@ -93,7 +86,7 @@ export default function CustomizedSteppers({ activeStep }) {
         activeStep={activeStep}
         connector={<ColorlibConnector />}
       >
-        {steps.map((label) => (
+        {steps.map((label, idx) => (
           <Step key={label}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
           </Step>

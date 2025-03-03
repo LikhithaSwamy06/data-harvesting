@@ -1,8 +1,6 @@
-// Dashboard.js
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import CustomizedSteppers from './CustomizedStepper';
 import './styles.css';
 import { Button } from '@mui/material';
@@ -15,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 function Projects({ activeStep, setActiveStep }) {
   const [age, setAge] = useState('');
   const [newProject, setNewProject] = useState(false);
-  const [projectName, setProjectName] = useState('false');
+  const [projectName, setProjectName] = useState('');
   const [projectList, setProjectList] = useState([]);
   const navigate = useNavigate();
 
@@ -30,7 +28,9 @@ function Projects({ activeStep, setActiveStep }) {
 
   const handleContinue = () => {
     setActiveStep(1);
-    setProjectList([...projectList], projectName);
+    if (projectName) {
+      setProjectList([...projectList, projectName]);
+    }
     navigate('/dashboard/data-artifacts');
   };
 
@@ -40,38 +40,31 @@ function Projects({ activeStep, setActiveStep }) {
       <CustomizedSteppers activeStep={activeStep} />
       <h1>Choose a project</h1>
       <h3>Select an existing project or create a new one</h3>
+
       <div className="project-card">
         <FormControl sx={{ m: 1, minWidth: '50%', height: '40px' }}>
-          <Typography>Select a project</Typography>
-          <Select
-            value={age}
-            onChange={handleChange}
-            displayEmpty
-            inputProps={{ 'aria-label': 'Without label' }}
-          >
+          <Select value={age} onChange={handleChange} displayEmpty>
             <MenuItem value="new">Create a new project</MenuItem>
             <MenuItem value="default">Default project</MenuItem>
-            {projectList?.map((item) => (
-              <MenuItem value={item}>{item}</MenuItem>
+            {projectList?.map((item, idx) => (
+              <MenuItem key={idx} value={item}>
+                {item}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
         {newProject && (
           <FormControl sx={{ m: 1, width: '100%' }} variant="outlined">
-            <Typography>Project name</Typography>
             <OutlinedInput
-              id="outlined-adornment-weight"
-              onChange={(e) => setProjectName(e?.target?.value)}
-              aria-describedby="outlined-weight-helper-text"
-              inputProps={{
-                'aria-label': 'weight',
-              }}
+              placeholder="Project name"
+              onChange={(e) => setProjectName(e.target.value)}
             />
           </FormControl>
         )}
       </div>
+
       <div className="btn-container">
-        <Button className="btn-primary" onClick={() => handleContinue()}>
+        <Button className="btn-primary" onClick={handleContinue}>
           Continue
         </Button>
         <Button
