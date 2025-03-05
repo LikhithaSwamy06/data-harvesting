@@ -1,5 +1,5 @@
-// Dashboard.js
 import React from 'react';
+import { Link } from 'react-router-dom'; // <-- Import Link from react-router-dom
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,6 +15,20 @@ import './styles.css';
 
 const drawerWidth = 240;
 
+// Example arrays describing each navigation item
+const mainNavItems = [
+  { text: 'Dashboard', icon: <InboxIcon />, path: '/dashboard' },
+  { text: 'Activity', icon: <MailIcon />, path: '/dashboard/activity' },
+  { text: 'Projects', icon: <InboxIcon />, path: '/dashboard/project' },
+  { text: 'Blueprints', icon: <MailIcon />, path: '/dashboard/blueprints' },
+];
+
+const secondaryNavItems = [
+  { text: 'Profile', icon: <InboxIcon />, path: '/profile' },
+  { text: 'Settings', icon: <MailIcon />, path: '/settings' },
+  { text: 'Logout', icon: <InboxIcon />, path: '/logout' },
+];
+
 function SideNav() {
   return (
     <Drawer
@@ -28,28 +42,33 @@ function SideNav() {
       <Toolbar />
       <Box sx={{ overflow: 'auto' }}>
         <List>
-          {['Dashboard', 'Activity', 'Projects', 'Blueprints'].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon className="list-item">
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText className="list-item" primary={text} />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
+          {mainNavItems.map((item, index) => (
+            <ListItem key={item.text} disablePadding>
+              {/* Turn each ListItemButton into a link via component={Link} */}
+              <ListItemButton
+                component={Link}
+                to={item.path}
+                className="list-item-button"
+              >
+                <ListItemIcon className="list-item">{item.icon}</ListItemIcon>
+                <ListItemText className="list-item" primary={item.text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
+
         <Divider />
+
         <List>
-          {['Profile', 'Settings', 'Logout'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon className="list-item">
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText className="list-item" primary={text} />
+          {secondaryNavItems.map((item, index) => (
+            <ListItem key={item.text} disablePadding>
+              <ListItemButton
+                component={Link}
+                to={item.path}
+                className="list-item-button"
+              >
+                <ListItemIcon className="list-item">{item.icon}</ListItemIcon>
+                <ListItemText className="list-item" primary={item.text} />
               </ListItemButton>
             </ListItem>
           ))}
